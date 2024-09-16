@@ -11,100 +11,24 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+    <link href="https://unpkg.com/flowbite@latest/dist/flowbite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<style>
-    body {
-        transition: background-color 0.3s, color 0.3s;
-    }
 
-    /* Light mode */
-    body {
-        background-color: #ffffff;
-        color: #000000;
-    }
-
-    /* Dark mode styles */
-    body.dark-mode {
-        background-color: #000000;
-        color: #ffffff;
-    }
-
-    /* Switch styles */
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: .4s;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        border-radius: 50%;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: .4s;
-    }
-
-    input:checked+.slider {
-        background-color: #2196F3;
-    }
-
-    input:checked+.slider:before {
-        transform: translateX(26px);
-    }
-
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-</style>
-
-<body class="font-sans antialiased">
-
-    <button id="theme-toggle" class="p-2 bg-gray-200 dark:bg-gray-700 rounded">
-        Toggle Dark Mode
-    </button>
+<body class="font-sans antialiased overflow-hidden">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        {{-- 
         @include('layouts.navigation')
-
-        <!-- Page Heading -->
         @isset($header)
             <header class="bg-white dark:bg-gray-800 shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
-            </header> --}}
-        {{-- @endisset --}}
-        <!-- Page Content -->
-        <main>
+            </header>
+        @endisset
+        <main class="flex">
             {{ $slot }}
         </main>
     </div>

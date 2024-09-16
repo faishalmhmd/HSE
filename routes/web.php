@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\KaryawanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +22,8 @@ require __DIR__.'/auth.php';
 // admin Middleware
 Route::middleware(['auth','userMiddleware'])->group(function() {
     Route::get('dashboard',[UserController::class,'index'])->name('dashboard');
+    Route::get('karyawan',[KaryawanController::class,'index'])->name('karyawan');
+    Route::get('karyawans',[KaryawanController::class,'getDatakaryawan'])->name('get-data-karyawan');
 });
 
 // user middleware

@@ -1,7 +1,7 @@
-import './bootstrap'
-import './theme-manager'
+import "./bootstrap"
+import 'flowbite'
 
-import Alpine from 'alpinejs'
+import Alpine from "alpinejs"
 
 window.Alpine = Alpine
 
@@ -43,24 +43,5 @@ themeToggleBtn.addEventListener("click",function () {
             document.documentElement.classList.add("dark")
             localStorage.setItem("color-theme","dark")
         }
-    }
-})
-
-
-const themeToggle = document.getElementById('theme-toggle')
-const currentTheme = localStorage.getItem('theme')
-
-if (currentTheme === 'dark') {
-    document.body.classList.add('dark-mode')
-    themeToggle.checked = true
-}
-
-themeToggle.addEventListener('change',() => {
-    if (themeToggle.checked) {
-        document.body.classList.add('dark-mode')
-        localStorage.setItem('theme','dark')
-    } else {
-        document.body.classList.remove('dark-mode')
-        localStorage.setItem('theme','light')
     }
 })
