@@ -1,120 +1,45 @@
 <x-app-layout>
     <x-sidebar />
-    <div>
-        <table id="default-table">
-            <thead>
-                <tr>
-                    <th>
-                        <span class="flex items-center">
-                            Name
-                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                            </svg>
-                        </span>
-                    </th>
-                    <th data-type="date" data-format="YYYY/DD/MM">
-                        <span class="flex items-center">
-                            No Hp
-                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                            </svg>
-                        </span>
-                    </th>
-                    <th>
-                        <span class="flex items-center">
-                            Email
-                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                            </svg>
-                        </span>
-                    </th>
-                    <th>
-                        <span class="flex items-center">
-                            tgl lahir
-                            <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
-                            </svg>
-                        </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                <!-- Data will be populated here -->
-            </tbody>
-        </table>
+    <div class="w-full p-5">
+        <div class="bg-white dark:bg-zinc-800 dark:border-zinc-700 p-4 border overflow-x-auto rounded-xl">
+            <div class="p-5" x-data="paginationHandler()" x-init="init();">
+                <table class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-700 rounded">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-zinc-700 text-black dark:text-white">
+                            <template x-for="(column, index) in columns" :key="index">
+                                <th class="border px-4 py-2 text-left cursor-pointer" :style="{ width: column.width }"
+                                    @click="sortTable(column.field)">
+                                    <span x-text="column.label"></span>
+                                    <span x-show="sortField === column.field"
+                                        x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="(employee, index) in filteredEmployees" :key="employee.id">
+                            <tr>
+                                <template x-for="(column, index) in columns" :key="index">
+                                    <td class="border px-4 py-2 text-black dark:text-white"
+                                        :style="{ width: column.width }" x-text="employee[column.field]"></td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                <div class="mt-4">
+                    <button class="px-4 py-2 bg-gray-300 rounded" :disabled="!pagination.prev_page_url"
+                        @click="fetchData(pagination.prev_page_url)">
+                        Previous
+                    </button>
 
-        <div id="pagination-controls">
-            <!-- Pagination controls will be populated here -->
+                    <button class="px-4 py-2 bg-gray-300 rounded" :disabled="!pagination.next_page_url"
+                        @click="fetchData(pagination.next_page_url)">
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/umd/simple-datatables.min.js"></script>
-    <script>
-        let currentPage = 1;
-        let totalPages = 1;
-
-        async function fetchData(page = 1) {
-            try {
-                const response = await axios.get(`/karyawans?page=${page}`);
-                const {
-                    data,
-                    links
-                } = response.data.data;
-
-                const tableBody = document.getElementById('table-body');
-                tableBody.innerHTML = ''; // Clear existing content
-
-                data.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">${item.name}</td>
-                        <td>${item.no_hp}</td>
-                        <td>${item.email}</td>
-                        <td>${item.tgl_lahir}</td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-
-                totalPages = response.data.last_page;
-                currentPage = page;
-                updatePaginationControls(response.data.links);
-
-                // Initialize DataTable after populating
-                if (typeof simpleDatatables.DataTable !== 'undefined') {
-                    new simpleDatatables.DataTable("#default-table", {
-                        searchable: false,
-                        perPageSelect: false
-                    });
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        function updatePaginationControls(links) {
-            const paginationControls = document.getElementById('pagination-controls');
-            paginationControls.innerHTML = ''; // Clear existing controls
-
-            links.forEach(link => {
-                if (link.url) {
-                    const button = document.createElement('button');
-                    button.innerText = link.label;
-                    button.disabled = !link.active;
-                    button.addEventListener('click', () => fetchData(new URL(link.url).searchParams.get('page')));
-                    paginationControls.appendChild(button);
-                }
-            });
-        }
-
-        // Fetch data when the page loads
-        document.addEventListener('DOMContentLoaded', () => fetchData(currentPage));
-    </script>
+    <script src="{{ asset('js/administrator/karyawan.index.js') }}"></script>
 </x-app-layout>

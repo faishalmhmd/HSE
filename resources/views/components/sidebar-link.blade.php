@@ -9,8 +9,7 @@
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
-    <span
-        class="mx-2 font-bold text-xl text-black dark:text-gray-100 transition-colors duration-300 group-hover:text-black">
+    <span class="mx-2 font-bold text-lg text-black dark:text-gray-100 transition-colors duration-300">
         {{ $text }}
     </span>
 </a>
