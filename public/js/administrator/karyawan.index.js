@@ -32,7 +32,7 @@ function paginationHandler() {
         sortDirection: 'asc',
         pagination: {},
 
-        fetchData(url = '/karyawans') {
+        fetchData(url = '/get-data-karyawan') {
             axios.get(url)
                 .then(({
                     data
