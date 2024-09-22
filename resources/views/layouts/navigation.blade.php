@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-zinc-800 border-b dark:border-zinc-700 border-zinc-200">
+<nav x-data="{ open: false }" class="bg-white dark:bg-zinc-900 border-b dark:border-zinc-700 border-zinc-200">
     <div class="mx-auto px-4 ">
         <div class="flex justify-between h-16">
             <div class="flex">

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-sidebar />
     <div class="w-full p-5">
-        <div class="bg-white dark:bg-zinc-800 dark:border-zinc-700 p-4 border overflow-x-auto rounded-xl">
+        <div class="bg-white dark:bg-zinc-900 dark:border-zinc-700 p-4 border overflow-x-auto rounded-xl">
             <div class="p-5" x-data="paginationHandler()" x-init="init();">
                 <a href="{{ route('add-karyawan') }}">
                     <div class="flex justify-between">

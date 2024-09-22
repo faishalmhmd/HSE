@@ -10,10 +10,10 @@
             </button>
         </div>
         <ul class="space-y-2">
-            <span class="font-bold my-5 color:black dark:text-white">Menu</span>
+            <span class="font-bold my-5 text-zinc-800 dark:text-white">Menu</span>
             <x-sidebar-link :active="request()->routeIs('dashboard')" href="{{ route('dashboard') }}" text="Dashboard">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    class="stroke-black dark:stroke-white transition duration-150 ease-in-out">
+                    class="stroke-zinc-800 dark:stroke-white transition duration-150 ease-in-out">
                     <path
                         d="M14 5.6C14 5.03995 14 4.75992 14.109 4.54601C14.2049 4.35785 14.3578 4.20487 14.546 4.10899C14.7599 4 15.0399 4 15.6 4H18.4C18.9601 4 19.2401 4 19.454 4.10899C19.6422 4.20487 19.7951 4.35785 19.891 4.54601C20 4.75992 20 5.03995 20 5.6V8.4C20 8.96005 20 9.24008 19.891 9.45399C19.7951 9.64215 19.6422 9.79513 19.454 9.89101C19.2401 10 18.9601 10 18.4 10H15.6C15.0399 10 14.7599 10 14.546 9.89101C14.3578 9.79513 14.2049 9.64215 14.109 9.45399C14 9.24008 14 8.96005 14 8.4V5.6Z"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -28,10 +28,10 @@
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </x-sidebar-link>
-            <span class="font-bold my-5 color:black dark:text-white">Master Data</span>
+            <span class="font-bold my-5 text-zinc-800 dark:text-white">Master Data</span>
             <x-sidebar-link :active="request()->routeIs('karyawan')" href="{{ route('karyawan') }}" text="Data Karyawan">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none"
-                    class="stroke-black dark:stroke-white transition duration-150 ease-in-out">
+                    class="stroke-zinc-800 dark:stroke-white transition duration-150 ease-in-out">
                     <path
                         d="M13 20V18C13 15.2386 10.7614 13 8 13C5.23858 13 3 15.2386 3 18V20H13ZM13 20H21V19C21 16.0545 18.7614 14 16 14C14.5867 14 13.3103 14.6255 12.4009 15.6311M11 7C11 8.65685 9.65685 10 8 10C6.34315 10 5 8.65685 5 7C5 5.34315 6.34315 4 8 4C9.65685 4 11 5.34315 11 7ZM18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9Z"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

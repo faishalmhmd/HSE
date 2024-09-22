@@ -22,10 +22,12 @@ require __DIR__.'/auth.php';
 // admin Middleware
 Route::middleware(['auth','userMiddleware'])->group(function() {
     Route::get('dashboard',[UserController::class,'index'])->name('dashboard');
-    // karyawan
+    // web karyawan controller
     Route::get('karyawan',[KaryawanController::class,'index'])->name('karyawan');
     Route::get('karyawan/add',[KaryawanController::class,'add'])->name('add-karyawan');
+    // api karyawan controller
     Route::get('get-data-karyawan',[KaryawanController::class,'getDatakaryawan'])->name('get-data-karyawan');
+    Route::post('add-data-karyawan',[KaryawanController::class,'insertDataKaryawan'])->name('insert-data-karyawan');
 });
 
 // user middleware

@@ -7,7 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/administrator/karyawan.index.js'],
+                'resources/js/karyawan.index.js'],
             refresh: true,
         }),
     ],

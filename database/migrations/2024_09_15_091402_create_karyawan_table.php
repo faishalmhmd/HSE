@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email');
-            $table->string('no_hp');
+            $table->string('no_hp')->nullable();
             $table->date('tgl_lahir');
             $table->date('tgl_masuk');
             $table->timestamps();

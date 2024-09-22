@@ -1,19 +1,19 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-3NswN5OL.css",
+    "file": "assets/app-BJjQLAKc.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/js/administrator/karyawan.index.js": {
-    "file": "assets/karyawan.index-l0sNRNKZ.js",
-    "name": "karyawan.index",
-    "src": "resources/js/administrator/karyawan.index.js",
-    "isEntry": true
-  },
   "resources/js/app.js": {
-    "file": "assets/app-rppYK06C.js",
+    "file": "assets/app-DJ9WgLOc.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/karyawan.index.js": {
+    "file": "assets/karyawan.index-l0sNRNKZ.js",
+    "name": "karyawan.index",
+    "src": "resources/js/karyawan.index.js",
     "isEntry": true
   }
 }
