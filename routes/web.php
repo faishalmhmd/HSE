@@ -28,6 +28,8 @@ Route::middleware(['auth','userMiddleware'])->group(function() {
     // api karyawan controller
     Route::get('get-data-karyawan',[KaryawanController::class,'getDatakaryawan'])->name('get-data-karyawan');
     Route::post('add-data-karyawan',[KaryawanController::class,'insertDataKaryawan'])->name('insert-data-karyawan');
+    // export pdf 
+    Route::get('pdf-data-karyawan',[KaryawanController::class,'exportDataKaryawan'])->name('pdf-data-karyawan');
 });
 
 // user middleware

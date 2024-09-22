@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class KaryawanController extends Controller
 {   
@@ -65,7 +67,12 @@ class KaryawanController extends Controller
     //======================================= Report API
 
 
-    // this function 
-    // return :  
+    // this function report pdf
+    // return :  file pdf
+    public function exportDataKaryawan() {
+        $karyawan = Karyawan::all();
+        $pdf = Pdf::loadView('user.karyawan.pdf', compact('karyawan'));
+        return $pdf->download('user.karyawan.pdf');
+    }
 
 }
