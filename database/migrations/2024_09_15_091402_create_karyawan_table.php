@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email');
             $table->string('no_hp')->nullable();
+            $table->string('status')->default('active');
             $table->date('tgl_lahir');
             $table->date('tgl_masuk');
             $table->timestamps();

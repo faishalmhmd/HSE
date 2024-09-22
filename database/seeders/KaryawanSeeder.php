@@ -24,7 +24,8 @@ class KaryawanSeeder extends Seeder
             $data[] = [
                 'nama' => $faker->name,
                 'email' => $faker->unique()->safeEmail,
-                'no_hp' => $faker->phoneNumber,
+                'no_hp' => '08' . $faker->numberBetween(10000000, 99999999),
+                'status' => 'active',
                 'tgl_lahir' => $faker->date('Y-m-d', '2000-01-01'),
                 'tgl_masuk' => $faker->date('Y-m-d', '2024-01-01'),
                 'created_at' => now(),

@@ -18,6 +18,16 @@ function paginationHandler() {
             width: '250px'
         },
         {
+            label: 'No Hp',
+            field: 'no_hp',
+            width: '250px'
+        },
+        {
+            label: 'Status',
+            field: 'status',
+            width: '100px'
+        },
+        {
             label: 'Tanggal Masuk',
             field: 'tgl_masuk',
             width: '150px'
@@ -27,7 +37,11 @@ function paginationHandler() {
             field: 'tgl_lahir',
             width: '150px'
         },
-        ],
+        {
+            label: 'Actions',
+            field: 'actions',
+            width: '150px'
+        },],
         sortField: 'id',
         sortDirection: 'asc',
         pagination: {},
@@ -61,6 +75,20 @@ function paginationHandler() {
                 (a[field] === b[field]) ? 0 : (a[field] > b[field] ? 1 : -1) * (this.sortDirection === 'asc' ?
                     1 : -1)
             )
+        },
+        editEmployee(id) {
+            console.log('Edit employee with ID:',id)
+            // Implement your edit logic here
+        },
+
+        deleteEmployee(id) {
+            if (confirm('Are you sure you want to delete this employee?')) {
+                axios.delete(`/delete-employee/${id}`)
+                    .then(() => {
+                        this.fetchData()
+                    })
+                    .catch(console.error)
+            }
         }
     }
 }
