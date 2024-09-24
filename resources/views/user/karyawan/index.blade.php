@@ -7,8 +7,22 @@
                 <div class="mb-10">
                     <div class="grid grid-cols-8 gap-5">
                         <div
-                            class="px-5 py-10 bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-500 border rounded-lg text-black dark:text-white">
-                            Karyawan Aktif
+                            class="px-5 py-4  font-semibold border-gray-300 dark:border-zinc-500 border rounded-lg text-black dark:text-white">
+                            <span class="flex items-center justify-between text-zinc-600 dark:text-white">
+                                Karyawan Aktif
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+                                        stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </span>
+
+                            <p class="font-bold text-2xl">24</p>
                         </div>
                     </div>
                 </div>
@@ -17,7 +31,7 @@
                     <div class="text-2xl font-bold mb-4 mr-auto text-black dark:text-white">Data Karyawan</div>
                     <a href="{{ route('add-karyawan') }}">
                         <div
-                            class="text-lg text-white font-bold mb-4 flex items-center bg-green-400 hover:bg-green-500 transition duration-150 ease-in-out p-2 rounded-lg">
+                            class="text-lg text-white font-bold mb-4 flex items-center bg-zinc-400 hover:bg-zinc-500 transition duration-150 ease-in-out p-2 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
                                 <path
@@ -29,7 +43,7 @@
                     </a>
                     <a href="{{ route('pdf-data-karyawan') }}" class="ml-2">
                         <div
-                            class="text-lg text-white font-bold mb-4 flex items-center bg-yellow-400 hover:bg-yellow-500 transition duration-150 ease-in-out p-2 rounded-lg">
+                            class="text-lg text-white font-bold mb-4 flex items-center bg-zinc-400 hover:bg-zinc-500 transition duration-150 ease-in-out p-2 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
                                 <path
@@ -63,7 +77,7 @@
                                         <template x-if="column.field === 'actions'">
                                             <div class="flex space-x-2">
                                                 <a :href="`/karyawan/${employee.id}/edit`"
-                                                    class="bg-zinc-500 py-2 px-5 rounded-lg font-bold text-white">
+                                                    class="bg-zinc-500 py-2 px-5 rounded-lg font-bold text-white hover:bg-zinc-600 transition duration-150 ease-in-ou">
                                                     Edit
                                                 </a>
                                                 <button @click="deleteEmployee(employee.id)"
@@ -73,10 +87,10 @@
                                         <template x-if="column.field === 'status'">
                                             <span
                                                 :class="{
-                                                    'bg-zinc-700 text-white rounded-lg border border-zinc-900 dark:border-white': employee[
+                                                    'bg-zinc-700 text-white rounded-lg border border-zinc-900 dark:border-zinc-600': employee[
                                                         column
                                                         .field] === 'active',
-                                                    'bg-zinc-300 rounded-lg border border-zinc-400 text-white': employee[
+                                                    'bg-zinc-300 rounded-lg border border-zinc-400 text-zinc-700': employee[
                                                         column
                                                         .field] !== 'active'
                                                 }"
