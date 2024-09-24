@@ -51,6 +51,7 @@ function paginationHandler() {
                 .then(({
                     data
                 }) => {
+                    console.log(data)
                     this.employees = data.data
                     this.filteredEmployees = [...this.employees]
                     this.pagination = {

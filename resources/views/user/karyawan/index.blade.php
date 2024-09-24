@@ -68,19 +68,19 @@
                                                     class="bg-red-500 py-2 px-5 rounded-lg font-bold text-white">Delete</button>
                                             </div>
                                         </template>
-                                        <!-- gatau disini error -->
                                         <template x-if="column.field === 'status'">
                                             <span
-                                                x-text="employee[column.field] === 'active' ? 'Active' : employee[column.field]"></span>
-                                            <span x-show="employee[column.field] === 'active'"
-                                                class="ml-2 text-green-500 bg-green-200 rounded-full px-2 py-1 text-xs font-semibold">
-                                                Active
-                                            </span>
+                                                :class="{
+                                                    'bg-green-500 text-white': employee[column.field] === 'active',
+                                                    'bg-red-500 text-white': employee[column.field] !== 'active'
+                                                }"
+                                                class="rounded-lg font-bold py-1 px-2"
+                                                x-text="employee[column.field]"></span>
                                         </template>
-
                                         <template x-if="column.field !== 'actions' && column.field !== 'status'">
                                             <span x-text="employee[column.field]"></span>
                                         </template>
+
                                     </td>
                                 </template>
                             </tr>
