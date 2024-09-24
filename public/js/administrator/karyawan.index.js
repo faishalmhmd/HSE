@@ -2,6 +2,7 @@ function paginationHandler() {
     return {
         employees: [],
         filteredEmployees: [],
+        searchQuery: '',
         columns: [{
             label: 'No',
             field: 'id',
@@ -51,7 +52,6 @@ function paginationHandler() {
                 .then(({
                     data
                 }) => {
-                    console.log(data)
                     this.employees = data.data
                     this.filteredEmployees = [...this.employees]
                     this.pagination = {
@@ -77,10 +77,22 @@ function paginationHandler() {
                     1 : -1)
             )
         },
-        editEmployee(id) {
-
+        filterEmployees() {
+            const query = this.searchQuery
+            if (query.trim() === '') {
+                this.fetchData()
+                return
+            }
+            axios.get(`/search-data-karyawan?search=${query}`)
+                .then(({ data }) => {
+                    this.filteredEmployees = data.data
+                    this.pagination = {
+                        prev_page_url: data.prev_page_url,
+                        next_page_url: data.next_page_url,
+                    }
+                })
+                .catch(console.error)
         },
-
         deleteEmployee(id) {
             if (confirm('Are you sure you want to delete this employee?')) {
                 axios.delete(`/delete-employee/${id}`)

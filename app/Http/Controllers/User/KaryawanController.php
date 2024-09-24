@@ -43,13 +43,29 @@ class KaryawanController extends Controller
         $perPage = 10; 
         $sortBy = $request->input('sort_by', 'id');
         $sortOrder = $request->input('sort_order', 'asc');
-
+        $searchQuery = $request->input('search', ''); 
+    
         if ($request->ajax() || $request->isXmlHttpRequest()) {
-            $karyawan = Karyawan::orderBy($sortBy, $sortOrder)->paginate($perPage);
+            $query = Karyawan::query();
+    
+            // Apply search filter if there is a search query
+            if (!empty($searchQuery)) {
+                $query->where(function($query) use ($searchQuery) {
+                    $query->where('nama', 'like', "%{$searchQuery}%")
+                          ->orWhere('email', 'like', "%{$searchQuery}%");
+                });
+                // Fetch all matching results without pagination
+                $karyawan = $query->orderBy($sortBy, $sortOrder)->get(); // Use get() instead of paginate()
+                return response()->json([
+                    'data' => $karyawan,
+                    'pagination' => null // Clear pagination info
+                ]);
+            }
+    
+            // Fetch paginated results if there is no search query
+            $karyawan = $query->orderBy($sortBy, $sortOrder)->paginate($perPage);
             return response()->json($karyawan); 
         }
-
-    
     }
 
     // this function store data karyawan into db
@@ -74,6 +90,59 @@ class KaryawanController extends Controller
         ], 201);
     }
 
+    // this function edit data karyawan 
+    // return :  response data
+    public function editDataKaryawan(Request $request) {
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'tgl_lahir' => 'required|date',
+            'tgl_masuk' => 'required|date',
+        ]);
+    
+        $karyawan = Karyawan::findOrFail($request->id);
+        $karyawan->nama = $request->nama_lengkap;
+        $karyawan->email = $request->email;
+        $karyawan->tgl_lahir = $request->tgl_lahir;
+        $karyawan->tgl_masuk = $request->tgl_masuk;
+    
+        $karyawan->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Data karyawan updated successfully.',
+            'data' => $karyawan
+        ],200);
+
+    }
+
+    // this function search karyawan
+    // return :  data karyawan
+    public function searchDataKaryawan(Request $request)
+    {
+        $sortBy = $request->input('sort_by', 'id');
+        $sortOrder = $request->input('sort_order', 'asc');
+        $searchQuery = $request->input('search', '');
+
+        if ($request->ajax() || $request->isXmlHttpRequest()) {
+            $query = Karyawan::query();
+
+            // Apply search filter if there is a search query
+            if (!empty($searchQuery)) {
+                $query->where(function($query) use ($searchQuery) {
+                    $query->where('nama', 'like', "%{$searchQuery}%")
+                        ->orWhere('email', 'like', "%{$searchQuery}%");
+                });
+            }
+
+            // Fetch all matching results without pagination
+            $karyawan = $query->orderBy($sortBy, $sortOrder)->get();
+            return response()->json([
+                'data' => $karyawan,
+                'pagination' => null // Clear pagination info
+            ]);
+        }
+    }
     //======================================= Report API
 
 

@@ -9,14 +9,11 @@
                 <span class="font-medium text-zinc-500 dark:text-zinc-300">Silahkan tambah data karyawan</span>
                 <form class="mt-5" @submit.prevent="submitForm" x-data="{
                     formData: {
+                        id: {{ $karyawan->id }},
                         nama_lengkap: '{{ $karyawan->nama ?? '' }}',
                         email: '{{ $karyawan->email ?? '' }}',
                         tgl_lahir: '{{ $karyawan->tgl_lahir ?? '' }}',
                         tgl_masuk: '{{ $karyawan->tgl_masuk ?? '' }}'
-                    },
-                    submitForm() {
-                        // Handle the form submission here
-                        console.log(this.formData);
                     }
                 }">
                     <div class="grid gap-6 mb-6 grid-cols-4">
@@ -88,7 +85,7 @@
 
                 },
                 submitForm() {
-                    axios.post('/add-data-karyawan', this.formData)
+                    axios.post('/edit-data-karyawan', this.formData)
                         .then(response => {
                             Swal.fire({
                                 title: 'Berhasil!',

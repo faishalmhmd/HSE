@@ -28,7 +28,9 @@ Route::middleware(['auth','userMiddleware'])->group(function() {
     Route::get('karyawan/{id}/edit',[KaryawanController::class,'edit'])->name('edit-karyawan');
     // api karyawan controller
     Route::get('get-data-karyawan',[KaryawanController::class,'getDatakaryawan'])->name('get-data-karyawan');
+    Route::get('search-data-karyawan',[KaryawanController::class,'searchDataKaryawan'])->name('search-data-karyawan');
     Route::post('add-data-karyawan',[KaryawanController::class,'insertDataKaryawan'])->name('insert-data-karyawan');
+    Route::post('edit-data-karyawan',[KaryawanController::class,'editDataKaryawan'])->name('edit-data-karyawan');
     // export pdf 
     Route::get('pdf-data-karyawan',[KaryawanController::class,'exportDataKaryawan'])->name('pdf-data-karyawan');
 });
