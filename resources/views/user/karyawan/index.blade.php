@@ -4,20 +4,21 @@
     <div class="w-full p-5">
         <div class="bg-white dark:bg-zinc-900 dark:border-zinc-700 p-4 border overflow-x-auto rounded-xl">
             <div class="p-5" x-data="paginationHandler()" x-init="init();">
-                <div class="grid grid-cols-8 gap-5">
-                    <div class="px-5 py-10 bg-gray-100 border-gray-300 border rounded-lg">
-                        Karyawan Aktif
+                <div class="mb-10">
+                    <div class="grid grid-cols-8 gap-5">
+                        <div
+                            class="px-5 py-10 bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-zinc-500 border rounded-lg text-black dark:text-white">
+                            Karyawan Aktif
+                        </div>
                     </div>
                 </div>
-                <hr class="my-5">
-
                 <!-- Add Karyawan -->
                 <div class="flex ">
                     <div class="text-2xl font-bold mb-4 mr-auto text-black dark:text-white">Data Karyawan</div>
                     <a href="{{ route('add-karyawan') }}">
                         <div
                             class="text-lg text-white font-bold mb-4 flex items-center bg-green-400 hover:bg-green-500 transition duration-150 ease-in-out p-2 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
                                 <path
                                     d="M20 18L17 18M17 18L14 18M17 18V15M17 18V21M11 21H4C4 17.134 7.13401 14 11 14C11.695 14 12.3663 14.1013 13 14.2899M15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7Z"
@@ -29,7 +30,7 @@
                     <a href="{{ route('pdf-data-karyawan') }}" class="ml-2">
                         <div
                             class="text-lg text-white font-bold mb-4 flex items-center bg-yellow-400 hover:bg-yellow-500 transition duration-150 ease-in-out p-2 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none">
                                 <path
                                     d="M20 18L17 18M17 18L14 18M17 18V15M17 18V21M11 21H4C4 17.134 7.13401 14 11 14C11.695 14 12.3663 14.1013 13 14.2899M15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7Z"
@@ -40,13 +41,12 @@
                     </a>
                 </div>
 
-                <table
-                    class="min-w-full table-auto border-collapse border border-gray-300 dark:border-gray-700 rounded">
+                <table class="min-w-full table-auto border-collapse">
                     <thead>
-                        <tr class="bg-gray-100 dark:bg-zinc-700 text-black dark:text-white">
+                        <tr class="bg-gray-100 dark:bg-zinc-700 text-black dark:text-white ">
                             <template x-for="(column, index) in columns" :key="index">
-                                <th class="border px-4 py-2 text-left cursor-pointer" :style="{ width: column.width }"
-                                    @click="sortTable(column.field)">
+                                <th class="border border-zinc-200 dark:border-zinc-500 px-4 py-2 text-left cursor-pointer"
+                                    :style="{ width: column.width }" @click="sortTable(column.field)">
                                     <span x-text="column.label"></span>
                                     <span x-show="sortField === column.field"
                                         x-text="sortDirection === 'asc' ? '▲' : '▼'"></span>
@@ -58,21 +58,27 @@
                         <template x-for="(employee, index) in filteredEmployees" :key="employee.id">
                             <tr>
                                 <template x-for="(column, index) in columns" :key="index">
-                                    <td class="border px-4 py-2 text-black dark:text-white"
+                                    <td class="border border-zinc-200 dark:border-zinc-500 px-4 py-2 text-black dark:text-white"
                                         :style="{ width: column.width }">
                                         <template x-if="column.field === 'actions'">
                                             <div class="flex space-x-2">
-                                                <button @click="editEmployee(employee.id)"
-                                                    class="bg-blue-500 py-2 px-5 rounded-lg font-bold text-white">Edit</button>
+                                                <a :href="`/karyawan/${employee.id}/edit`"
+                                                    class="bg-zinc-500 py-2 px-5 rounded-lg font-bold text-white">
+                                                    Edit
+                                                </a>
                                                 <button @click="deleteEmployee(employee.id)"
-                                                    class="bg-red-500 py-2 px-5 rounded-lg font-bold text-white">Delete</button>
+                                                    class="bg-zinc-500 py-2 px-5 rounded-lg font-bold text-white">Delete</button>
                                             </div>
                                         </template>
                                         <template x-if="column.field === 'status'">
                                             <span
                                                 :class="{
-                                                    'bg-green-500 text-white': employee[column.field] === 'active',
-                                                    'bg-red-500 text-white': employee[column.field] !== 'active'
+                                                    'bg-zinc-700 text-white rounded-lg border border-zinc-900 dark:border-white': employee[
+                                                        column
+                                                        .field] === 'active',
+                                                    'bg-zinc-300 rounded-lg border border-zinc-400 text-white': employee[
+                                                        column
+                                                        .field] !== 'active'
                                                 }"
                                                 class="rounded-lg font-bold py-1 px-2"
                                                 x-text="employee[column.field]"></span>

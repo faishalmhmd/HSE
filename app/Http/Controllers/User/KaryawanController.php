@@ -25,6 +25,14 @@ class KaryawanController extends Controller
         return view('user.karyawan.add');
     }
 
+    // this function edit karyawan
+    // return :  display edit karyawan
+    public function edit($id) {
+        $karyawan = Karyawan::findOrfail($id);
+        return view('user.karyawan.edit',compact('karyawan'));
+    }
+
+
     //======================================= API Karyawan
 
 
@@ -32,13 +40,15 @@ class KaryawanController extends Controller
     // return : data karyawan with pagination
     public function getDatakaryawan(Request $request)
     {
-        $perPage = $request->input('per_page', 10);
-        $page = $request->input('page', 1);
-        
+        $perPage = 10; 
+        $sortBy = $request->input('sort_by', 'id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
         if ($request->ajax() || $request->isXmlHttpRequest()) {
-            $karyawan = Karyawan::paginate($perPage);
+            $karyawan = Karyawan::orderBy($sortBy, $sortOrder)->paginate($perPage);
             return response()->json($karyawan); 
         }
+
     
     }
 

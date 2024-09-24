@@ -78,8 +78,7 @@ function paginationHandler() {
             )
         },
         editEmployee(id) {
-            console.log('Edit employee with ID:',id)
-            // Implement your edit logic here
+
         },
 
         deleteEmployee(id) {

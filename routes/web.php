@@ -25,6 +25,7 @@ Route::middleware(['auth','userMiddleware'])->group(function() {
     // web karyawan controller
     Route::get('karyawan',[KaryawanController::class,'index'])->name('karyawan');
     Route::get('karyawan/add',[KaryawanController::class,'add'])->name('add-karyawan');
+    Route::get('karyawan/{id}/edit',[KaryawanController::class,'edit'])->name('edit-karyawan');
     // api karyawan controller
     Route::get('get-data-karyawan',[KaryawanController::class,'getDatakaryawan'])->name('get-data-karyawan');
     Route::post('add-data-karyawan',[KaryawanController::class,'insertDataKaryawan'])->name('insert-data-karyawan');
