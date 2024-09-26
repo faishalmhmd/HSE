@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+// controller
 use App\Http\Controllers\User\KaryawanController;
+use App\Http\Controllers\User\MandorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +33,10 @@ Route::middleware(['auth','userMiddleware'])->group(function() {
     Route::get('search-data-karyawan',[KaryawanController::class,'searchDataKaryawan'])->name('search-data-karyawan');
     Route::post('add-data-karyawan',[KaryawanController::class,'insertDataKaryawan'])->name('insert-data-karyawan');
     Route::post('edit-data-karyawan',[KaryawanController::class,'editDataKaryawan'])->name('edit-data-karyawan');
+    // web mandor controller
+    Route::get('mandor',[MandorController::class,'index'])->name('staff');
+    // api mandor controller
+    Route::get('get-data-mandor',[MandorController::class,'getDataMandor'])->name('get-data-mandor');
     // export pdf 
     Route::get('pdf-data-karyawan',[KaryawanController::class,'exportDataKaryawan'])->name('pdf-data-karyawan');
 });

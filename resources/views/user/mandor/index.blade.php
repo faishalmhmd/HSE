@@ -9,7 +9,7 @@
                         <div
                             class="px-5 py-4  font-semibold border-gray-300 dark:border-zinc-500 border rounded-lg text-black dark:text-white">
                             <span class="flex items-center justify-between text-zinc-600 dark:text-white">
-                                Karyawan Aktif
+                                Mandor Aktif
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                                     fill="none">
                                     <path
@@ -26,7 +26,7 @@
                         <div
                             class="px-5 py-4  font-semibold border-gray-300 dark:border-zinc-500 border rounded-lg text-black dark:text-white">
                             <span class="flex items-center justify-between text-zinc-600 dark:text-white">
-                                Karyawan Non-Aktif
+                                Mandor Non-Aktif
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                     viewBox="0 0 24 24" fill="none">
                                     <path
@@ -44,7 +44,7 @@
                 </div>
                 <!-- Add Karyawan -->
                 <div class="flex ">
-                    <div class="text-2xl font-bold mb-4 mr-auto text-black dark:text-white">Data Karyawan</div>
+                    <div class="text-2xl font-bold mb-4 mr-auto text-black dark:text-white">Data Mandor</div>
                     <!-- search Karyawan-->
                     <div class="relative mb-6">
                         <div

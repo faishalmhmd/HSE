@@ -14,8 +14,7 @@ class KaryawanController extends Controller
 
     // this function return index page of karyawan
     // return : karyawan index page
-    public function index()
-    {
+    public function index(){
         return view('user.karyawan.index');
     }
    

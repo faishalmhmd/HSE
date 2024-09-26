@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <body class="font-sans antialiased overflow-hidden">
-    <div class="min-h-screen bg-gray-100 dark:bg-zinc-950">
+    <div class="min-h-screen bg-white dark:bg-zinc-950">
         @include('layouts.navigation')
         @isset($header)
             <header class="bg-white dark:bg-gray-800 shadow">
