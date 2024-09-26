@@ -60,7 +60,7 @@
                         {{-- <input type="text" placeholder="Search..."  class="border border-zinc-300 p-2 mb-4 w-full" /> --}}
                         <input type="text" id="input-group-1"
                             class="border border-zinc-300 text-zinc-900 text-lg rounded-lg focus:ring-zinc-500 focus:border-zinc-500 block w-full ps-10 p-2 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-zinc-300 dark:focus:border-zinc-300 pl-12"
-                            placeholder="Cari Karyawan" x-model="searchQuery" @input="filterEmployees">
+                            placeholder="Cari Karyawan" x-model="searchQuery" @input="filterData">
                     </div>
                     <!-- add Karyawan-->
                     <a href="{{ route('add-karyawan') }}" class="mx-4">
@@ -104,7 +104,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template x-for="(employee, index) in filteredEmployees" :key="employee.id">
+                        <template x-for="(employee, index) in filteredData" :key="employee.id">
                             <tr>
                                 <template x-for="(column, index) in columns" :key="index">
                                     <td class="border border-zinc-200 dark:border-zinc-500 px-4 py-2 text-black dark:text-white"
@@ -157,5 +157,5 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/administrator/karyawan.index.js') }}"></script>
+    <script src="{{ asset('js/dashboard/karyawan.index.js') }}"></script>
 </x-app-layout>

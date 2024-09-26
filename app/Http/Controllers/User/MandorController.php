@@ -19,38 +19,68 @@ class MandorController extends Controller
     }
 
 
-    //======================================= API Karyawan
+    //======================================= API mandor
 
 
-    // this function to dipslay list karyawan data with pagination
-    // return : data karyawan with pagination
+    // this function to dipslay list mandor data with pagination
+    // return : data mandor with pagination
     public function getDataMandor(Request $request)
     {
         $perPage = 10; 
         $sortBy = $request->input('sort_by', 'id');
         $sortOrder = $request->input('sort_order', 'asc');
         $searchQuery = $request->input('search', ''); 
-    
         if ($request->ajax() || $request->isXmlHttpRequest()) {
             $query = Mandor::query();
-    
-            // Apply search filter if there is a search query
             if (!empty($searchQuery)) {
                 $query->where(function($query) use ($searchQuery) {
                     $query->where('nama', 'like', "%{$searchQuery}%")
                           ->orWhere('email', 'like', "%{$searchQuery}%");
                 });
-                // Fetch all matching results without pagination
-                $karyawan = $query->orderBy($sortBy, $sortOrder)->get(); // Use get() instead of paginate()
+                $mandor = $query->orderBy($sortBy, $sortOrder)->get(); 
                 return response()->json([
-                    'data' => $karyawan,
-                    'pagination' => null // Clear pagination info
+                    'data' => $mandor,
+                    'pagination' => null 
                 ]);
             }
-    
-            // Fetch paginated results if there is no search query
-            $karyawan = $query->orderBy($sortBy, $sortOrder)->paginate($perPage);
-            return response()->json($karyawan); 
+            $mandor = $query->orderBy($sortBy, $sortOrder)->paginate($perPage);
+            return response()->json($mandor); 
         }
     }
+
+    // this function search mandor
+    // return :  data mandor
+    public function searchDataMandor(Request $request)
+    {
+        $sortBy = $request->input('sort_by', 'id');
+        $sortOrder = $request->input('sort_order', 'asc');
+        $searchQuery = $request->input('search', '');
+
+        if ($request->ajax() || $request->isXmlHttpRequest()) {
+            $query = mandor::query();
+            if (!empty($searchQuery)) {
+                $query->where(function($query) use ($searchQuery) {
+                    $query->where('nama', 'like', "%{$searchQuery}%")
+                        ->orWhere('email', 'like', "%{$searchQuery}%");
+                });
+            }
+            $mandor = $query->orderBy($sortBy, $sortOrder)->get();
+            return response()->json([
+                'data' => $mandor,
+                'pagination' => null 
+            ]);
+        }
+    }
+
+    //======================================= Report API
+
+
+    // this function report pdf
+    // return :  file pdf
+    public function exportDataMandor() {
+        $mandor = Mandor::all();
+        $pdf = Pdf::loadView('user.mandor.pdf', compact('mandor'));
+        return $pdf->download('user.mandor.pdf');
+    }
+
 }

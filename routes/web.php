@@ -34,10 +34,13 @@ Route::middleware(['auth','userMiddleware'])->group(function() {
     Route::post('add-data-karyawan',[KaryawanController::class,'insertDataKaryawan'])->name('insert-data-karyawan');
     Route::post('edit-data-karyawan',[KaryawanController::class,'editDataKaryawan'])->name('edit-data-karyawan');
     // web mandor controller
-    Route::get('mandor',[MandorController::class,'index'])->name('staff');
+    Route::get('mandor',[MandorController::class,'index'])->name('mandor');
+    Route::get('mandor/add',[MandorController::class,'add'])->name('add-mandor');
     // api mandor controller
     Route::get('get-data-mandor',[MandorController::class,'getDataMandor'])->name('get-data-mandor');
+    Route::get('search-data-mandor',[MandorController::class,'searchDataMandor'])->name('search-data-mandor');
     // export pdf 
+    Route::get('pdf-data-mandor',[MandorController::class,'exportDataMandor'])->name('pdf-data-mandor');
     Route::get('pdf-data-karyawan',[KaryawanController::class,'exportDataKaryawan'])->name('pdf-data-karyawan');
 });
 

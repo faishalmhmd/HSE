@@ -1,7 +1,7 @@
 function paginationHandler() {
     return {
-        employees: [],
-        filteredEmployees: [],
+        data: [], // Changed employees to data
+        filteredData: [], // Changed filteredEmployees to filteredData
         searchQuery: '',
         columns: [{
             label: 'No',
@@ -29,11 +29,6 @@ function paginationHandler() {
             width: '100px'
         },
         {
-            label: 'Tanggal Masuk',
-            field: 'tgl_masuk',
-            width: '150px'
-        },
-        {
             label: 'Tanggal Lahir',
             field: 'tgl_lahir',
             width: '150px'
@@ -47,13 +42,13 @@ function paginationHandler() {
         sortDirection: 'asc',
         pagination: {},
 
-        fetchData(url = '/get-data-karyawan') {
+        fetchData(url = '/get-data-mandor') {
             axios.get(url)
                 .then(({
                     data
                 }) => {
-                    this.employees = data.data
-                    this.filteredEmployees = [...this.employees]
+                    this.data = data.data // Changed employees to data
+                    this.filteredData = [...this.data] // Changed filteredEmployees to filteredData
                     this.pagination = {
                         prev_page_url: data.prev_page_url,
                         next_page_url: data.next_page_url,
@@ -67,25 +62,25 @@ function paginationHandler() {
             this.fetchData()
         },
         sortTable(field) {
-            if (!this.filteredEmployees.length) return
+            if (!this.filteredData.length) return // Changed filteredEmployees to filteredData
             this.sortDirection = (this.sortField === field) ? (this.sortDirection === 'asc' ? 'desc' : 'asc') :
                 'asc'
             this.sortField = field
 
-            this.filteredEmployees.sort((a,b) =>
+            this.filteredData.sort((a,b) => // Changed filteredEmployees to filteredData
                 (a[field] === b[field]) ? 0 : (a[field] > b[field] ? 1 : -1) * (this.sortDirection === 'asc' ?
                     1 : -1)
             )
         },
-        filterEmployees() {
+        filterData() { // Changed filterEmployees to filterData
             const query = this.searchQuery
             if (query.trim() === '') {
                 this.fetchData()
                 return
             }
-            axios.get(`/search-data-karyawan?search=${query}`)
+            axios.get(`/search-data-mandor?search=${query}`)
                 .then(({ data }) => {
-                    this.filteredEmployees = data.data
+                    this.filteredData = data.data // Changed filteredEmployees to filteredData
                     this.pagination = {
                         prev_page_url: data.prev_page_url,
                         next_page_url: data.next_page_url,
@@ -93,7 +88,7 @@ function paginationHandler() {
                 })
                 .catch(console.error)
         },
-        deleteEmployee(id) {
+        deleteData(id) { // Changed deleteEmployee to deleteData
             if (confirm('Are you sure you want to delete this employee?')) {
                 axios.delete(`/delete-employee/${id}`)
                     .then(() => {
